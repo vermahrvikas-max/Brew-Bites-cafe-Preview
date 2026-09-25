@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brew & Bites Cafe - Artisanal Food & Drinks</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FDF9F3',
+              100: '#F7EFE2',
+              200: '#EBDCC5',
+              300: '#DEC29E',
+              400: '#C79E6F',
+              500: '#A97C47',
+              600: '#8A5D2E',
+              700: '#6C431F',
+              800: '#4F2E14',
+              900: '#331B0B',
+              950: '#1F0E05'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #FDF9F3; }
+    ::-webkit-scrollbar-thumb { background: #DEC29E; border-radius: 9999px; }
+    .glass-header {
+      background: rgba(253, 249, 243, 0.92);
+      backdrop-filter: blur(14px);
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-brand-50 text-stone-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-200">
+
+  <header class="sticky top-0 z-40 glass-header border-b border-brand-200 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-800 to-brand-600 text-amber-200 flex items-center justify-center shadow-md shadow-brand-900/15 text-xl">
+          <i class="fa-solid fa-mug-saucer"></i>
+        </div>
+        <div>
+          <h1 class="font-serif text-2xl font-bold tracking-tight text-brand-950">Brew &amp; Bites Cafe</h1>
+          <p class="text-xs font-semibold text-brand-600 tracking-wider uppercase">Artisanal Sips &amp; Warm Bakes</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button id="openCartBtn" class="relative group flex items-center gap-2.5 bg-brand-900 hover:bg-brand-800 text-brand-50 px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-200 shadow-md shadow-brand-900/20 active:scale-95">
+          <i class="fa-solid fa-bag-shopping text-brand-300 text-base"></i>
+          <span class="hidden sm:inline font-semibold">My Tray</span>
+          <span id="headerCartCount" class="bg-amber-600 text-white text-xs font-extrabold px-2 py-0.5 rounded-full group-hover:scale-110 transition-transform">0</span>
+          <span id="headerCartTotal" class="hidden md:inline text-xs font-bold text-amber-100 border-l border-brand-700 pl-2">₹0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="relative overflow-hidden bg-gradient-to-b from-brand-100/60 via-brand-50 to-brand-50 pt-8 pb-10 border-b border-brand-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-8 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-200/70 border border-brand-300 text-brand-900 text-xs font-semibold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Zero Additional Taxes • Direct Transparent Pricing
+          </div>
+          <h2 class="font-serif text-3xl sm:text-5xl font-extrabold text-brand-950 tracking-tight leading-tight">
+            Handcrafted Coffee, Crispy Patties &amp; Decadent Sweets.
+          </h2>
+          <p class="text-stone-600 text-sm sm:text-base max-w-xl">
+            Order directly for your table or grab a fresh takeaway box. Pure, genuine cafe prices without any extra GST or hidden fees added at checkout.
+          </p>
+        </div>
+
+        <div class="lg:col-span-4 flex justify-end">
+          <div class="w-full max-w-xs bg-white rounded-3xl p-4 shadow-xl border border-brand-200/80">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-2.5">
+              <span class="text-xs font-bold uppercase tracking-wider text-brand-600"><i class="fa-solid fa-crown text-amber-500 mr-1"></i> Bestseller</span>
+              <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900">₹149</span>
+            </div>
+            <div class="flex items-center gap-3 mt-3">
+              <div class="w-12 h-12 rounded-2xl bg-brand-100 text-brand-800 flex items-center justify-center text-xl">
+                <i class="fa-solid fa-mug-hot"></i>
+              </div>
+              <div class="flex-grow">
+                <h4 class="font-bold text-stone-900 text-sm">Classic Cappuccino</h4>
+                <p class="text-[11px] text-stone-500 line-clamp-1">Velvety steamed microfoam &amp; espresso</p>
+              </div>
+              <button onclick="quickAdd(1)" class="w-8 h-8 rounded-xl bg-brand-900 text-white hover:bg-brand-700 flex items-center justify-center text-xs font-bold transition shadow-sm active:scale-95" title="Add Cappuccino">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between mb-6 pb-6 border-b border-brand-200/70">
+      
+      <!-- Search Input -->
+      <div class="relative flex-1 max-w-md">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
+        <input 
+          id="searchInput" 
+          type="text" 
+          placeholder="Search cappuccino, puffs, burgers, frappe..." 
+          class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-stone-300 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition text-sm shadow-sm"
+        />
+      </div>
+
+      <!-- Dietary Preference Filters -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 lg:pb-0">
+        <span class="text-xs font-bold text-stone-500 uppercase tracking-wider mr-1">Filter:</span>
+        <button id="dietAll" onclick="setDiet('all')" class="diet-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold border transition bg-brand-900 text-white border-brand-900 shadow-sm">
+          All Menu
+        </button>
+        <button id="dietVeg" onclick="setDiet('veg')" class="diet-btn px-3.5 py-1.5 rounded-xl text-xs font-bold border border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-50 transition flex items-center gap-1.5">
+          <span class="w-3 h-3 rounded-sm border border-emerald-600 flex items-center justify-center p-[1px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span></span>
+          Veg Only
+        </button>
+        <button id="dietNonVeg" onclick="setDiet('non-veg')" class="diet-btn px-3.5 py-1.5 rounded-xl text-xs font-bold border border-rose-300 bg-white text-rose-800 hover:bg-rose-50 transition flex items-center gap-1.5">
+          <span class="w-3 h-3 rounded-sm border border-rose-600 flex items-center justify-center p-[1px]"><span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span></span>
+          Non-Veg
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Pills -->
+    <div class="flex gap-2 overflow-x-auto pb-4 no-scrollbar mb-6" id="categoryTabs">
+      <!-- Tabs injected via JS -->
+    </div>
+
+    <!-- Menu Cards Grid -->
+    <div id="menuContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Cards rendered dynamically -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="noResults" class="hidden text-center py-16">
+      <div class="w-16 h-16 rounded-full bg-brand-100 text-brand-800 flex items-center justify-center mx-auto text-2xl mb-3">
+        <i class="fa-solid fa-utensils"></i>
+      </div>
+      <h3 class="text-base font-bold text-stone-700">No matching items found</h3>
+      <p class="text-xs text-stone-500 mt-1">Try another keyword or select a different category filter.</p>
+    </div>
+  </main>
+
+  <div id="cartDrawerBackdrop" class="fixed inset-0 bg-stone-950/60 z-50 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <aside id="cartDrawer" class="fixed right-0 top-0 bottom-0 w-full sm:w-[420px] bg-white z-50 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out border-l border-brand-200">
+    <!-- Drawer Header -->
+    <div class="px-6 py-5 border-b border-stone-200 flex items-center justify-between bg-brand-50/80">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-brand-800 text-amber-200 flex items-center justify-center text-sm">
+          <i class="fa-solid fa-basket-shopping"></i>
+        </div>
+        <h3 class="font-serif text-xl font-bold text-brand-950">Your Order Tray</h3>
+        <span id="drawerBadgeCount" class="text-xs font-bold bg-brand-200 text-brand-900 px-2 py-0.5 rounded-full">0 items</span>
+      </div>
+      <button id="closeCartBtn" class="text-stone-400 hover:text-stone-700 p-2 rounded-xl hover:bg-stone-100 transition" aria-label="Close Tray">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div id="cartItemsList" class="flex-grow overflow-y-auto p-6 space-y-3.5">
+      <!-- Injected dynamically -->
+    </div>
+
+    <!-- Drawer Footer: Subtotal and Total match directly (0 GST) -->
+    <div class="border-t border-stone-200 p-6 bg-brand-50/50 space-y-3">
+      <div class="space-y-1.5 text-xs text-stone-600">
+        <div class="flex justify-between">
+          <span>Items Subtotal</span>
+          <span id="billSubtotal" class="font-semibold text-stone-800">₹0</span>
+        </div>
+        <div class="flex justify-between text-emerald-700">
+          <span>Taxes / GST</span>
+          <span class="font-bold">₹0 (No GST Applied)</span>
+        </div>
+        <div class="flex justify-between text-stone-500">
+          <span>Packing &amp; Service Fee</span>
+          <span class="font-semibold text-emerald-700">FREE</span>
+        </div>
+        <div class="flex justify-between text-lg font-extrabold text-brand-950 border-t border-brand-200/90 pt-2.5 mt-2">
+          <span>Grand Total</span>
+          <span id="billGrandTotal" class="text-brand-800">₹0</span>
+        </div>
+      </div>
+
+      <div class="pt-2 flex gap-2">
+        <button id="clearCartBtn" onclick="clearCart()" class="px-3.5 py-3 rounded-xl border border-stone-300 text-stone-500 hover:bg-stone-100 text-xs font-bold transition">
+          Clear
+        </button>
+        <button id="checkoutBtn" onclick="openCheckoutModal()" class="flex-grow py-3 px-4 rounded-xl bg-brand-800 hover:bg-brand-900 text-white font-bold text-sm tracking-wide shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <div id="checkoutModal" class="fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-200 transform scale-95 transition-transform duration-200" id="checkoutModalCard">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <h3 class="font-serif text-2xl font-bold text-brand-950">Place Your Order</h3>
+          <p class="text-xs text-stone-500 mt-1">Direct kitchen dispatch via WhatsApp • No GST added</p>
+        </div>
+        <button onclick="closeCheckoutModal()" class="text-stone-400 hover:text-stone-700 p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form id="orderForm" onsubmit="handlePlaceOrder(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1.5 uppercase tracking-wide">Order Dining Method</label>
+          <div class="grid grid-cols-2 gap-2.5">
+            <label class="cursor-pointer border rounded-2xl p-2.5 flex items-center gap-2 border-brand-500 bg-brand-50/60 font-semibold text-xs text-brand-900 has-[:checked]:ring-2 has-[:checked]:ring-brand-700">
+              <input type="radio" name="orderType" value="Dine-In" checked onchange="toggleTableInput(true)" class="accent-brand-800">
+              <span>🍽️ Dine-In</span>
+            </label>
+            <label class="cursor-pointer border rounded-2xl p-2.5 flex items-center gap-2 border-stone-200 hover:bg-stone-50 font-semibold text-xs text-stone-700 has-[:checked]:ring-2 has-[:checked]:ring-brand-700">
+              <input type="radio" name="orderType" value="Takeaway" onchange="toggleTableInput(false)" class="accent-brand-800">
+              <span>🛍️ Takeaway Parcel</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="tableFieldContainer">
+          <label class="block text-xs font-bold text-stone-700 mb-1">Table Number</label>
+          <input type="number" id="custTable" placeholder="e.g. 5" min="1" max="60" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Full Name</label>
+          <input type="text" id="custName" required placeholder="e.g. Rahul Sharma" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Phone Number</label>
+          <input type="tel" id="custPhone" required placeholder="10-digit mobile number" pattern="[0-9]{10}" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Special Cooking Instructions (Optional)</label>
+          <textarea id="custNotes" rows="2" placeholder="e.g. Less sweet, extra crisp puff, no onions" class="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-xs"></textarea>
+        </div>
+
+        <div class="p-3 bg-brand-50/80 rounded-2xl border border-brand-200/70 text-xs flex justify-between items-center">
+          <div>
+            <span class="text-stone-600 block text-[11px]">Final Amount (No Tax/GST):</span>
+            <span id="modalTotal" class="font-extrabold text-brand-900 text-base">₹0</span>
+          </div>
+          <span class="text-[11px] font-semibold text-stone-500 bg-white px-2 py-1 rounded-md border border-stone-200">Pay at counter or UPI</span>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-700/20 flex items-center justify-center gap-2 transition active:scale-95">
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          Send Order via WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-5 py-3 rounded-full text-xs font-semibold shadow-2xl flex items-center gap-2.5 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 z-50">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toastMsg">Tray updated</span>
+  </div>
+
+  <script>
+    // Complete Cafe Menu Dataset
+    const MENU_ITEMS = [
+      // Coffee & Chai
+      { id: 1, name: "Classic Cappuccino", category: "Coffee & Chai", price: 149, isVeg: true, desc: "Rich espresso shot topped with equal parts steamed milk and dense velvety foam.", icon: "fa-mug-hot" },
+      { id: 2, name: "Caramel Macchiato", category: "Coffee & Chai", price: 179, isVeg: true, desc: "Freshly steamed milk marked with espresso and finished with buttery caramel drizzle.", icon: "fa-mug-saucer" },
+      { id: 3, name: "Hazelnut Frappe", category: "Coffee & Chai", price: 199, isVeg: true, desc: "Blended iced coffee infused with roasted hazelnut syrup, topped with whipped cream.", icon: "fa-blender" },
+      { id: 4, name: "Desi Masala Chai", category: "Coffee & Chai", price: 69, isVeg: true, desc: "Strong brewed milk tea simmered with crushed ginger, cardamom, and aromatic spices.", icon: "fa-teapot" },
+
+      // Burgers
+      { id: 5, name: "Crispy Aloo Tikki Supreme", category: "Burgers", price: 119, isVeg: true, desc: "Spiced potato patty fried crisp, layered with tomatoes, onions, and tangy mint mayo.", icon: "fa-burger" },
+      { id: 6, name: "Smokey Paneer Crunch", category: "Burgers", price: 179, isVeg: true, desc: "Crispy crumb-fried paneer block tossed in smoky chipotle glaze with crunchy lettuce.", icon: "fa-burger" },
+      { id: 7, name: "Makhani Crispy Chicken Burger", category: "Burgers", price: 219, isVeg: false, desc: "Golden-fried spiced chicken breast fillet smothered in creamy butter makhani gravy.", icon: "fa-drumstick-bite" },
+
+      // Hot Patties (Puffs)
+      { id: 8, name: "Masala Aloo Puff", category: "Hot Patties", price: 49, isVeg: true, desc: "Golden flaky puff pastry stuffed with homestyle spiced potato and peas filling.", icon: "fa-bread-slice" },
+      { id: 9, name: "Cheese Burst Corn Patty", category: "Hot Patties", price: 79, isVeg: true, desc: "Crisp pastry shell oozing with melted mozzarella, cheddar, and sweet kernel corn.", icon: "fa-cheese" },
+      { id: 10, name: "Paneer Tikka Patty", category: "Hot Patties", price: 89, isVeg: true, desc: "Multi-layered puff crust packed with smoky tandoori-marinated paneer chunks.", icon: "fa-bread-slice" },
+
+      // Quick Snacks
+      { id: 11, name: "Peri Peri Fries", category: "Quick Snacks", price: 129, isVeg: true, desc: "Crisp french fries tossed generously in spicy African bird's eye chili seasoning.", icon: "fa-fire" },
+      { id: 12, name: "Garlic Breadsticks", category: "Quick Snacks", price: 139, isVeg: true, desc: "Oven-baked breadsticks brushed with garlic butter and herbs, served with cheesy dip.", icon: "fa-bread-slice" },
+      { id: 13, name: "Loaded Nachos", category: "Quick Snacks", price: 189, isVeg: true, desc: "Tortilla chips baked under melted cheese, topped with salsa, jalapeños, and sour cream.", icon: "fa-bowl-food" },
+      { id: 14, name: "Spring Rolls", category: "Quick Snacks", price: 149, isVeg: true, desc: "Crispy golden pastry sheets rolled with shredded cabbage, carrots, and sweet chili dip.", icon: "fa-utensils" },
+
+      // Cold Drinks & Shakes
+      { id: 15, name: "Chocolate Thick Shake", category: "Cold Drinks & Shakes", price: 169, isVeg: true, desc: "Decadent shake made with rich Belgian chocolate fudge and creamy dairy milk.", icon: "fa-glass-water" },
+      { id: 16, name: "Virgin Mojito", category: "Cold Drinks & Shakes", price: 139, isVeg: true, desc: "Muddled fresh mint sprigs, lime wedges, and simple syrup topped with sparkling fizz.", icon: "fa-lemon" },
+      { id: 17, name: "Oreo Blast", category: "Cold Drinks & Shakes", price: 189, isVeg: true, desc: "Crushed Oreo cookies blended thick with vanilla ice cream and dark chocolate drizzle.", icon: "fa-cookie" },
+      { id: 18, name: "Peach Iced Tea", category: "Cold Drinks & Shakes", price: 129, isVeg: true, desc: "Slow-brewed black tea infused with sweet peach puree and served chilled over ice.", icon: "fa-glass-water-droplet" },
+
+      // Sweet Cravings
+      { id: 19, name: "Sizzling Brownie with Ice Cream", category: "Sweet Cravings", price: 199, isVeg: true, desc: "Warm fudge brownie on a cast-iron skillet, topped with vanilla bean ice cream and hot fudge.", icon: "fa-ice-cream" },
+      { id: 20, name: "Choco Lava Cake", category: "Sweet Cravings", price: 119, isVeg: true, desc: "Warm chocolate sponge cake filled with an oozing molten dark chocolate center.", icon: "fa-cake-candles" }
+    ];
+
+    const CATEGORIES = ["All", "Coffee & Chai", "Burgers", "Hot Patties", "Quick Snacks", "Cold Drinks & Shakes", "Sweet Cravings"];
+
+    let cart = {}; // { [id]: count }
+    let selectedCategory = "All";
+    let selectedDiet = "all";
+    let searchQuery = "";
+
+    window.addEventListener("DOMContentLoaded", () => {
+      renderCategoryTabs();
+      renderMenuItems();
+      setupEventListeners();
+    });
+
+    function renderCategoryTabs() {
+      const tabsContainer = document.getElementById("categoryTabs");
+      tabsContainer.innerHTML = CATEGORIES.map(cat => `
+        <button 
+          onclick="setCategory('${cat}')" 
+          class="whitespace-nowrap px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold transition-all border ${
+            selectedCategory === cat 
+            ? 'bg-brand-900 text-white border-brand-900 shadow-md shadow-brand-950/10' 
+            : 'bg-white text-stone-600 border-stone-200 hover:border-brand-300 hover:bg-brand-50'
+          }"
+        >
+          ${cat}
+        </button>
+      `).join('');
+    }
+
+    function renderMenuItems() {
+      const container = document.getElementById("menuContainer");
+      const noResults = document.getElementById("noResults");
+
+      const filtered = MENU_ITEMS.filter(item => {
+        const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
+        const matchesDiet = selectedDiet === "all" || (selectedDiet === "veg" && item.isVeg) || (selectedDiet === "non-veg" && !item.isVeg);
+        const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              item.category.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesDiet && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = "";
+        noResults.classList.remove("hidden");
+        return;
+      }
+
+      noResults.classList.add("hidden");
+      container.innerHTML = filtered.map(item => {
+        const qty = cart[item.id] || 0;
+        return `
+          <div class="bg-white rounded-3xl p-5 border border-stone-200 hover:border-brand-300 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-2">
+                  <div class="w-4 h-4 rounded-sm border ${item.isVeg ? 'border-emerald-600' : 'border-rose-600'} flex items-center justify-center p-[2px] bg-white">
+                    <div class="w-2 h-2 rounded-full ${item.isVeg ? 'bg-emerald-600' : 'bg-rose-600'}"></div>
+                  </div>
+                  <span class="text-[11px] font-bold tracking-wider text-stone-500 uppercase">${item.category}</span>
+                </div>
+                <div class="w-10 h-10 rounded-2xl bg-brand-100 group-hover:bg-brand-200 text-brand-800 flex items-center justify-center text-base transition-colors">
+                  <i class="fa-solid ${item.icon}"></i>
+                </div>
+              </div>
+
+              <h4 class="font-serif font-bold text-stone-900 text-lg group-hover:text-brand-800 transition-colors">${item.name}</h4>
+              <p class="text-stone-500 text-xs mt-1.5 leading-relaxed">${item.desc}</p>
+            </div>
+
+            <div class="flex items-center justify-between pt-5 mt-4 border-t border-stone-100">
+              <div>
+                <span class="text-[11px] text-stone-400 block font-medium">Price</span>
+                <span class="text-lg font-extrabold text-brand-950">₹${item.price}</span>
+              </div>
+
+              ${qty === 0 ? `
+                <button 
+                  onclick="updateCartItem(${item.id}, 1)" 
+                  class="bg-brand-100 hover:bg-brand-800 text-brand-900 hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
+                >
+                  <i class="fa-solid fa-plus text-[10px]"></i> ADD
+                </button>
+              ` : `
+                <div class="flex items-center bg-brand-900 text-white rounded-xl overflow-hidden p-1 shadow-md">
+                  <button onclick="updateCartItem(${item.id}, -1)" class="w-7 h-7 flex items-center justify-center hover:bg-brand-700 rounded-lg text-xs font-bold active:scale-90 transition">
+                    <i class="fa-solid fa-minus text-[10px]"></i>
+                  </button>
+                  <span class="px-2.5 text-xs font-bold">${qty}</span>
+                  <button onclick="updateCartItem(${item.id}, 1)" class="w-7 h-7 flex items-center justify-center hover:bg-brand-700 rounded-lg text-xs font-bold active:scale-90 transition">
+                    <i class="fa-solid fa-plus text-[10px]"></i>
+                  </button>
+                </div>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateCartItem(id, change) {
+      const current = cart[id] || 0;
+      const updated = current + change;
+
+      if (updated <= 0) {
+        delete cart[id];
+      } else {
+        cart[id] = updated;
+      }
+
+      const item = MENU_ITEMS.find(m => m.id === id);
+      showToast(change > 0 ? `Added ${item.name}` : `Removed ${item.name}`);
+      renderMenuItems();
+      updateCartDrawer();
+    }
+
+    function quickAdd(id) {
+      updateCartItem(id, 1);
+      openCartDrawer();
+    }
+
+    function clearCart() {
+      cart = {};
+      renderMenuItems();
+      updateCartDrawer();
+      showToast("Tray cleared");
+    }
+
+    // STRICT ZERO GST LOGIC: Subtotal === Grand Total
+    function updateCartDrawer() {
+      const totalCount = Object.values(cart).reduce((sum, q) => sum + q, 0);
+      const subtotal = Object.entries(cart).reduce((sum, [id, qty]) => {
+        const item = MENU_ITEMS.find(i => i.id === parseInt(id));
+        return sum + (item ? item.price * qty : 0);
+      }, 0);
+
+      const grandTotal = subtotal; // No GST, no taxes
+
+      document.getElementById("headerCartCount").textContent = totalCount;
+      document.getElementById("headerCartTotal").textContent = `₹${grandTotal}`;
+      document.getElementById("drawerBadgeCount").textContent = `${totalCount} item${totalCount === 1 ? '' : 's'}`;
+
+      document.getElementById("billSubtotal").textContent = `₹${subtotal}`;
+      document.getElementById("billGrandTotal").textContent = `₹${grandTotal}`;
+      document.getElementById("modalTotal").textContent = `₹${grandTotal}`;
+
+      const checkoutBtn = document.getElementById("checkoutBtn");
+      checkoutBtn.disabled = totalCount === 0;
+
+      const listContainer = document.getElementById("cartItemsList");
+      if (totalCount === 0) {
+        listContainer.innerHTML = `
+          <div class="h-full flex flex-col items-center justify-center text-center text-stone-400 py-16">
+            <div class="w-16 h-16 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-2xl mb-3">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </div>
+            <p class="font-bold text-stone-700">Your order tray is empty</p>
+            <p class="text-xs text-stone-400 mt-1">Select your favorite bites or drinks to begin!</p>
+          </div>
+        `;
+        return;
+      }
+
+      listContainer.innerHTML = Object.entries(cart).map(([idStr, qty]) => {
+        const item = MENU_ITEMS.find(i => i.id === parseInt(idStr));
+        if (!item) return '';
+        return `
+          <div class="flex items-center justify-between p-3.5 bg-stone-50 rounded-2xl border border-stone-200">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center text-base">
+                <i class="fa-solid ${item.icon}"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full ${item.isVeg ? 'bg-emerald-600' : 'bg-rose-600'}"></span>
+                  <h5 class="font-bold text-xs text-stone-900 line-clamp-1">${item.name}</h5>
+                </div>
+                <span class="text-xs text-brand-800 font-semibold">₹${item.price * qty} <span class="text-[10px] text-stone-400">(₹${item.price} each)</span></span>
+              </div>
+            </div>
+
+            <div class="flex items-center bg-white border border-stone-200 rounded-xl overflow-hidden shadow-xs">
+              <button onclick="updateCartItem(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center hover:bg-stone-100 font-bold text-stone-700 text-xs">
+                <i class="fa-solid fa-minus text-[9px]"></i>
+              </button>
+              <span class="px-2 text-xs font-bold text-stone-800">${qty}</span>
+              <button onclick="updateCartItem(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center hover:bg-stone-100 font-bold text-stone-700 text-xs">
+                <i class="fa-solid fa-plus text-[9px]"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setCategory(cat) {
+      selectedCategory = cat;
+      renderCategoryTabs();
+      renderMenuItems();
+    }
+
+    function setDiet(diet) {
+      selectedDiet = diet;
+      ['dietAll', 'dietVeg', 'dietNonVeg'].forEach(id => {
+        const btn = document.getElementById(id);
+        btn.classList.remove('bg-brand-900', 'text-white', 'border-brand-900');
+        if (id === 'dietVeg') btn.classList.add('bg-white', 'text-emerald-800');
+        if (id === 'dietNonVeg') btn.classList.add('bg-white', 'text-rose-800');
+        if (id === 'dietAll') btn.classList.add('bg-white', 'text-stone-700');
+      });
+
+      if (diet === 'all') {
+        const b = document.getElementById('dietAll');
+        b.className = 'diet-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold border transition bg-brand-900 text-white border-brand-900 shadow-sm';
+      } else if (diet === 'veg') {
+        const b = document.getElementById('dietVeg');
+        b.className = 'diet-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold border transition bg-emerald-700 text-white border-emerald-700 shadow-sm flex items-center gap-1.5';
+      } else {
+        const b = document.getElementById('dietNonVeg');
+        b.className = 'diet-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold border transition bg-rose-700 text-white border-rose-700 shadow-sm flex items-center gap-1.5';
+      }
+
+      renderMenuItems();
+    }
+
+    function setupEventListeners() {
+      document.getElementById("searchInput").addEventListener("input", (e) => {
+        searchQuery = e.target.value.trim();
+        renderMenuItems();
+      });
+
+      document.getElementById("openCartBtn").addEventListener("click", openCartDrawer);
+      document.getElementById("closeCartBtn").addEventListener("click", closeCartDrawer);
+      document.getElementById("cartDrawerBackdrop").addEventListener("click", closeCartDrawer);
+    }
+
+    function openCartDrawer() {
+      const drawer = document.getElementById("cartDrawer");
+      const backdrop = document.getElementById("cartDrawerBackdrop");
+      backdrop.classList.remove("opacity-0", "pointer-events-none");
+      drawer.classList.remove("translate-x-full");
+    }
+
+    function closeCartDrawer() {
+      const drawer = document.getElementById("cartDrawer");
+      const backdrop = document.getElementById("cartDrawerBackdrop");
+      backdrop.classList.add("opacity-0", "pointer-events-none");
+      drawer.classList.add("translate-x-full");
+    }
+
+    function openCheckoutModal() {
+      closeCartDrawer();
+      const modal = document.getElementById("checkoutModal");
+      const card = document.getElementById("checkoutModalCard");
+      modal.classList.remove("hidden");
+      setTimeout(() => {
+        modal.classList.remove("opacity-0");
+        card.classList.remove("scale-95");
+      }, 10);
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById("checkoutModal");
+      const card = document.getElementById("checkoutModalCard");
+      modal.classList.add("opacity-0");
+      card.classList.add("scale-95");
+      setTimeout(() => {
+        modal.classList.add("hidden");
+      }, 200);
+    }
+
+    function toggleTableInput(isTable) {
+      const container = document.getElementById("tableFieldContainer");
+      const tableInput = document.getElementById("custTable");
+      if (isTable) {
+        container.classList.remove("hidden");
+        tableInput.required = true;
+      } else {
+        container.classList.add("hidden");
+        tableInput.required = false;
+      }
+    }
+
+    function handlePlaceOrder(event) {
+      event.preventDefault();
+
+      const orderType = document.querySelector('input[name="orderType"]:checked').value;
+      const tableNum = document.getElementById("custTable").value;
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const notes = document.getElementById("custNotes").value.trim();
+
+      const orderItems = Object.entries(cart).map(([idStr, qty]) => {
+        const item = MENU_ITEMS.find(i => i.id === parseInt(idStr));
+        return `• ${item.name} x ${qty} = ₹${item.price * qty}`;
+      });
+
+      const total = Object.entries(cart).reduce((sum, [id, qty]) => {
+        const item = MENU_ITEMS.find(i => i.id === parseInt(id));
+        return sum + (item.price * qty);
+      }, 0);
+
+      // WhatsApp Message Formatting - Strictly No GST
+      let msg = `*NEW CAFE ORDER - Brew & Bites Cafe*\n`;
+      msg += `==========================\n`;
+      msg += `*Order Mode:* ${orderType} ${orderType === 'Dine-In' ? `(Table #${tableNum})` : ''}\n`;
+      msg += `*Customer:* ${name}\n`;
+      msg += `*Mobile:* ${phone}\n`;
+      if (notes) msg += `*Special Note:* ${notes}\n`;
+      msg += `==========================\n`;
+      msg += `*Items:*\n${orderItems.join('\n')}\n`;
+      msg += `==========================\n`;
+      msg += `*Total Amount:* ₹${total} (No GST)\n`;
+      msg += `==========================\n`;
+      msg += `_Generated from Brew & Bites Web App_`;
+
+      const cafeWhatsAppNumber = "919876543210";
+      const encodedMsg = encodeURIComponent(msg);
+      const whatsappUrl = `https://wa.me/${cafeWhatsAppNumber}?text=${encodedMsg}`;
+
+      window.open(whatsappUrl, '_blank');
+
+      closeCheckoutModal();
+      clearCart();
+      showToast("Order dispatched via WhatsApp!");
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      const msg = document.getElementById("toastMsg");
+      msg.textContent = message;
+      toast.classList.remove("opacity-0", "translate-y-4", "pointer-events-none");
+
+      setTimeout(() => {
+        toast.classList.add("opacity-0", "translate-y-4", "pointer-events-none");
+      }, 2400);
+    }
+  </script>
+</body>
+</html>
